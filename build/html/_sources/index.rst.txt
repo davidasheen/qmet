@@ -1,0 +1,55 @@
+.. qMET: Quality Assurance in Metabolomics documentation master file, created by
+   sphinx-quickstart on Mon Aug 21 14:40:44 2017.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+   
+.. currentmodule:: qmet
+
+qMET: Quality Assurance in Metabolomics
+=======================================
+
+*David A. Sheen*
+
+*National Institute of Standards and Technology*
+
+*Last Revision* |today|
+
+`Download this software from GitHub <https://github.com/davidasheen/qmet>`_
+
+Welcome to the home page for analysis software of qMET: Quality Assurance in Metabolomics. This software is a Python package that will perform consensus analysis on spectral data such as NMR, GC-MS and LC-MS.
+
+Legal
++++++
+
+This software is subject to the `NIST Software License <https://www.nist.gov/director/licensing>`_ (revised as of July 2017). This license can be found in the GitHub repo in the file named LICENSE. The following is a hopefully-useful but not-legally-binding summary:
+
+  * NIST software authored by NIST employees is in the public domain (15 USC 105).
+  * The software has NO WARRANTY.
+
+Contents
+++++++++
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+   
+   Project
+   Utilities
+   analysis_demo
+
+Links
++++++
+
+`GitHub profile <https://github.com/davidasheen>`_
+
+`NIST GitHub Organization <https://github.com/usnistgov>`_
+
+`NIST home page <http://nist.gov>`_
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
