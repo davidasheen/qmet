@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>qMET utility functions &#8212; qMET: Quality Assurance in Metabolomics 0.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Example usage and output" href="analysis_demo.html" />
+    <link rel="prev" title="The qMET Project class" href="Project.html" /> 
+  </head>
+  <body role="document">
+    <div class="header-wrapper" role="banner">
+      <div class="header">
+        <div class="headertitle"><a
+          href="index.html">qMET: Quality Assurance in Metabolomics 0.1.2 documentation</a></div>
+        <div class="rel" role="navigation" aria-label="related navigation">
+          <a href="Project.html" title="The qMET Project class"
+             accesskey="P">previous</a> |
+          <a href="analysis_demo.html" title="Example usage and output"
+             accesskey="N">next</a> |
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a>
+        </div>
+       </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="document">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qmet-utility-functions">
+<h1>qMET utility functions<a class="headerlink" href="#qmet-utility-functions" title="Permalink to this headline">¶</a></h1>
+<p>This page describes some of the utility functions that are used in the qMET interlaboratory consistency analysis.</p>
+<div class="section" id="default-reading-function">
+<h2>Default reading function<a class="headerlink" href="#default-reading-function" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="qmet.fanndataread">
+<code class="descclassname">qmet.</code><code class="descname">fanndataread</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qmet.html#fanndataread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qmet.fanndataread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads and normalizes a set of vector data in the file specified by filename</p>
+<dl class="docutils">
+<dt>The datafile is assumed to be in the format from the Fast Artificial Neural Network Library. This format is:</dt>
+<dd><ul class="first last simple">
+<li>One line that specifies the number of samples, the number of features in a sample, and the number of classes</li>
+<li><dl class="first docutils">
+<dt>Two lines per sample</dt>
+<dd><ul class="first last">
+<li>The feature vector for that sample</li>
+<li>The class vector for that sample</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Returns: </dt>
+<dd><ul class="first last simple">
+<li>featuredata, an array of the feature data</li>
+<li>classdata, an array of the class identifications</li>
+<li>fileinfo, an array containing the number of samples, the number of features, and the number of classes</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The file from which the neural network data are to be read</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="distance-metrics">
+<h2>Distance metrics<a class="headerlink" href="#distance-metrics" title="Permalink to this headline">¶</a></h2>
+<p>Several distance metrics not available in scipy are provided below.</p>
+<dl class="function">
+<dt id="qmet.hellinger">
+<code class="descclassname">qmet.</code><code class="descname">hellinger</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qmet.html#hellinger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qmet.hellinger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Hellinger distance between two sum-normalized vectors</p>
+<p><span class="math">\(d_h(x,y) = \sqrt{\sum_{i} \left(\sqrt{x_i} - \sqrt{y_i}\right)^2}\)</span></p>
+<p>Equivalently, for sum-normalized vectors</p>
+<p><span class="math">\(d_h(x,y) =  1 - \sum_{i} \left(\sqrt{x_i} - \sqrt{y_i}\right)\)</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>ndarray</em>) &#8211; The first vector</li>
+<li><strong>y</strong> (<em>ndarray</em>) &#8211; The second vector</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="docutils literal"><span class="pre">hellinger(x,y)</span> <span class="pre">=</span> <span class="pre">np.sqrt(</span> <span class="pre">1</span> <span class="pre">-</span> <span class="pre">np.dot(np.sqrt(x),np.sqrt(y))</span> <span class="pre">)</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qmet.hellinger_hyp">
+<code class="descclassname">qmet.</code><code class="descname">hellinger_hyp</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qmet.html#hellinger_hyp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qmet.hellinger_hyp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the hyperbolic Hellinger distance metric between two vectors</p>
+<div class="math">
+\[d_{hy} = \log \left(\frac{1 + d_h}{1 - d_h}\right)\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>ndarray</em>) &#8211; The first vector</li>
+<li><strong>y</strong> (<em>ndarray</em>) &#8211; The second vector</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="docutils literal"><span class="pre">hellinger_hyp(x,y)</span> <span class="pre">=</span> <span class="pre">math.log(</span> <span class="pre">(1+hellinger(x,y))/(1</span> <span class="pre">-</span> <span class="pre">hellinger(x,y))</span> <span class="pre">)</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qmet.jeffries">
+<code class="descclassname">qmet.</code><code class="descname">jeffries</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qmet.html#jeffries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qmet.jeffries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Jeffries divergence between two vectors</p>
+<div class="math">
+\[d_{SKL}(x,y) = \frac{1}{2} \left( \sum_{i} \left( x_i - y_i \right) \log \frac{x_i}{y_i}  \right)\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>ndarray</em>) &#8211; The first vector</li>
+<li><strong>y</strong> (<em>ndarray</em>) &#8211; The second vector</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="docutils literal"><span class="pre">jeffries(x,y)</span> <span class="pre">=</span> <span class="pre">(1/2)</span> <span class="pre">*</span> <span class="pre">(</span> <span class="pre">entropy(x,y)</span> <span class="pre">+</span> <span class="pre">entropy(y,x)</span> <span class="pre">)</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qmet.jensen">
+<code class="descclassname">qmet.</code><code class="descname">jensen</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qmet.html#jensen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qmet.jensen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Jensen-Shannon metric between two vectors</p>
+<div class="math">
+\[d^2_j = \sum_{i} \left( x_i \log_2 \frac{2x_i}{x_i + y_i} + y_i \log_2 \frac{2y_i}{x_i + y_i} \right) \]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>ndarray</em>) &#8211; The first vector</li>
+<li><strong>y</strong> (<em>ndarray</em>) &#8211; The second vector</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="docutils literal"><span class="pre">jensen(x,y)</span> <span class="pre">=</span> <span class="pre">entropy(x,m)</span> <span class="pre">+</span> <span class="pre">entropy(y,m)</span></code> where <code class="docutils literal"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">(1/2)</span> <span class="pre">*</span> <span class="pre">(x</span> <span class="pre">+</span> <span class="pre">y)</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="qmet.jensen_hyp">
+<code class="descclassname">qmet.</code><code class="descname">jensen_hyp</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qmet.html#jensen_hyp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qmet.jensen_hyp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the hyperbolic Jensen-Shannon metric between two vectors</p>
+<div class="math">
+\[d_{hy} = \log \left(\frac{1 + d_j}{1 - d_j}\right)\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>ndarray</em>) &#8211; The first vector</li>
+<li><strong>y</strong> (<em>ndarray</em>) &#8211; The second vector</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="docutils literal"><span class="pre">jensen_hyp(x,y)</span> <span class="pre">=</span> <span class="pre">math.log(</span> <span class="pre">(1+jensen_distance(x,y))/(1</span> <span class="pre">-</span> <span class="pre">jensen_distance(x,y))</span> <span class="pre">)</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="sidebar">
+          <h3>Table Of Contents</h3>
+          <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Project.html">The qMET Project class</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">qMET utility functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#default-reading-function">Default reading function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#distance-metrics">Distance metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis_demo.html">Example usage and output</a></li>
+</ul>
+
+          <div role="search">
+            <h3 style="margin-top: 1.5em;">Search</h3>
+            <form class="search" action="search.html" method="get">
+                <input type="text" name="q" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer">
+        <div class="left">
+          <div role="navigation" aria-label="related navigaton">
+            <a href="Project.html" title="The qMET Project class"
+              >previous</a> |
+            <a href="analysis_demo.html" title="Example usage and output"
+              >next</a> |
+            <a href="genindex.html" title="General Index"
+              >index</a>
+          </div>
+          <div role="note" aria-label="source link">
+              <br/>
+              <a href="_sources/Utilities.rst.txt"
+                rel="nofollow">Show Source</a>
+          </div>
+        </div>
+
+        <div class="right">
+          
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+  </body>
+</html>
